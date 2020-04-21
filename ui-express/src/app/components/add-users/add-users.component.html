@@ -32,10 +32,37 @@
           <!-- Email -->
           <label for="mail1">Email</label>
           <mat-form-field class="example-full-width">
-            <input id="mail1" matInput placeholder="Users email" formControlName="email">
+            <input id="mail1" matInput placeholder="Users email" formControlName="email" pattern="[A-Za-z0-9]+@[A-Za-z0-9]+.(com|co.in)">
             <mat-error *ngIf="handleError('email', 'required')">
               You must provide a  <strong>User email</strong>
             </mat-error>
+            <mat-error *ngIf="handleError('email', 'pattern')">
+              You must provide a valid  <strong>User email</strong>
+            </mat-error>
+
+          </mat-form-field>
+
+          <!-- Phone-->
+          <label for="phone1">Phone Number</label>
+          <mat-form-field class="example-full-width">
+            <input type="tel" id="phone1" matInput placeholder="Users Ph. Number" formControlName="phone" maxlength="10">
+            <mat-error *ngIf="handleError('phone', 'required')">
+              You must provide a  <strong>User contact detail</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- Address-->
+          <label for="addr1">Address</label>
+          <mat-form-field class="example-full-width">
+            <input id="addr1" matInput placeholder="Users Address" formControlName="addr">
+            <mat-error *ngIf="handleError('addr', 'required')">
+              You must provide a  <strong>User Address</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!--Role-->
+          <label for="role1">Role</label>
+          <mat-form-field class="example-full-width">
+            <input id="role1" matInput placeholder="Users Role" formControlName="role">
           </mat-form-field>
   
         </div>

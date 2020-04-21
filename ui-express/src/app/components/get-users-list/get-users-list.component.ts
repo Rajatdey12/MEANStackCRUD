@@ -12,7 +12,7 @@ export class GetUsersListComponent implements OnInit {
   UsersData: any = [];
   dataSource: MatTableDataSource<Users>;
   @ViewChild(MatPaginator, {static:false}) paginator: MatPaginator;
-  displayedColumns: string[] = ['id', 'Users_name', 'Users_Email'];
+  displayedColumns: string[] = ['id', 'Users_name', 'Users_Email', 'Phone', 'Address', 'Role', 'action'];
 
   constructor(private usersApi : ApiService) { 
     
@@ -28,13 +28,14 @@ export class GetUsersListComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteStudent(index: number, e){
+  deleteUsers(index: number, e){
     if(window.confirm('Are you sure')) {
       const data = this.dataSource.data;
       data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
       this.dataSource.data = data;
-      this.usersApi.DeleteStudent(e._id).subscribe()
+      this.usersApi.DeleteStudent(e.id).subscribe()
     }
+    alert("User Deleted Successfully!!");
   }
 
 }

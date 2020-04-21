@@ -43,7 +43,10 @@ export class AddUsersComponent implements OnInit {
     this.studentForm = this.fb.group({
       id: ['',[Validators.required]],
       name: ['', [Validators.required]],
-      email: ['', [Validators.required]]
+      email: ['', [Validators.required]],
+      phone: ['',[Validators.required]],
+      addr: ['',[Validators.required]],
+      role: ['']
     })
   }
 

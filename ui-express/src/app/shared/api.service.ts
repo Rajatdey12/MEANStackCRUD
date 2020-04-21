@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 export class ApiService {
 
-  endpoint: string = 'http://localhost:3000';
+  endpoint: string = 'http://localhost:3001';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
@@ -29,7 +29,7 @@ export class ApiService {
     return this.http.get(`${this.endpoint}/users`);
   }
 
-  // Get student
+  // Get student by id
   GetStudent(id): Observable<any> {
     let API_URL = `${this.endpoint}/getusers/${id}`;
     return this.http.get(API_URL, { headers: this.headers }).pipe(
@@ -43,7 +43,7 @@ export class ApiService {
   // Update student
   UpdateStudent(id, data: Users): Observable<any> {
     let API_URL = `${this.endpoint}/putusers/${id}`;
-    return this.http.put(API_URL, data, { headers: this.headers }).pipe(
+    return this.http.put(API_URL, data,{ headers: this.headers }).pipe(
       catchError(this.errorMgmt)
     )
   }

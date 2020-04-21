@@ -1,6 +1,6 @@
 <!-- Title group  -->
 <div class="title-group">
-    <h1 class="mat-h1">Students List</h1>
+    <h1 class="mat-h1">Users List</h1>
     <mat-divider fxFlex="1 0"></mat-divider>
   </div>
   
@@ -10,12 +10,12 @@
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> Student ID </th>
+          <th mat-header-cell *matHeaderCellDef> Users ID </th>
           <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
   
         <ng-container matColumnDef="Users_name">
-          <th mat-header-cell *matHeaderCellDef> Student Name </th>
+          <th mat-header-cell *matHeaderCellDef> Users Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
   
@@ -24,17 +24,27 @@
           <td mat-cell *matCellDef="let element"> {{element.email}} </td>
         </ng-container>
   
-        <ng-container matColumnDef="section">
-          <th mat-header-cell *matHeaderCellDef> Section </th>
-          <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+        <ng-container matColumnDef="Phone">
+          <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.addr}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Role">
+          <th mat-header-cell *matHeaderCellDef> Role </th>
+          <td mat-cell *matCellDef="let element"> {{element.role}} </td>
         </ng-container>
   
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element; let i = index;">
             <button mat-raised-button color="primary" class="push-right"
-              [routerLink]="['/edit-student/', element._id]">Edit</button>
-            <button mat-raised-button color="accent" (click)="deleteStudent(i, element)">Delete</button>
+              [routerLink]="['/edit-users/', element.id]">Edit</button>
+            <button mat-raised-button color="accent" (click)="deleteUsers(i, element)">Delete</button>
           </td>
         </ng-container>
   

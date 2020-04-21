@@ -2,10 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const db = require('./quries')
 const app = express()
-const port = 3000
+const port = 3001
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
