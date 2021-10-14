@@ -1,27 +1,26 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+const cors = require('cors');
+
 const db = require('./quries')
+const api = require('./api')
+
 const app = express()
-const port = 3001
+app.use(cors());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+const dotenv = require('dotenv')
+dotenv.config({ path : './.env'})
 
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
+
+app.listen(process.env.APP_PORT, () => {
+  console.log(`MEAN STACK CRUD APP running on port ${process.env.APP_PORT}.`)
   })
-)
-
 
 app.get('/', (req, res) => {
     res.json({ info: 'Node.js, Express, and Postgres API' })
   })
+
+app.use(express.json())
+
 
 app.get('/users', db.getUsers)
 app.get('/getusers/:id', db.getUserById)
@@ -30,6 +29,5 @@ app.put('/putusers/:id', db.updateUser)
 app.delete('/delusers/:id', db.deleteUser)
 app.delete('/usersName/:name', db.deleteUserByName)
 
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
-    })
+app.get('/getMockData', api.mockDataTest)
+app.get('/fetchStates', api.listOfStates)

@@ -1,16 +1,32 @@
-/* -- Create database connection --*/ 
+const postgres = require('pg')
 
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'DemoBase',
-  password: 'password',
-  port: 5432,
-})
+const dotenv = require('dotenv')
+dotenv.config({ path : './.env'})
+
+/* -- Create new database Pool --*/ 
+
+const dbConfig = {
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.DB_PORT
+}
+
+var pool = new postgres.Pool(dbConfig)
+
+pool.connect((error) =>{
+  if(error){
+      console.log("DB connecting.....", error);
+  }
+  else {
+      console.log("POSTGRES connected to......."+ dbConfig.database);
+  }
+});
+
 
 /*-- Get all users --*/
-const getUsers = (request, response,next) => {
+const getUsers = (request, response, next) => {
     pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
       if (error) {
         next(error)
@@ -18,6 +34,7 @@ const getUsers = (request, response,next) => {
       response.status(200).json(results.rows)
     })
   }
+
 
   /*-- Get a single user by id--*/
 const getUserById = (request, response, next) =>{
